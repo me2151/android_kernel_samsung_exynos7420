@@ -108,7 +108,11 @@
 		supports-highspeed;
 		enable-cache-control;
 		use-enable-shift;
+#ifdef CONFIG_NOBLEDEV
+		qos_int_level = <400000>;
+#else
 		qos_int_level = <468000>;
+#endif
 		fifo-depth = <0x40>;
 		card-detect-delay = <200>;
 		samsung,dw-mshc-ciu-div = <3>;
@@ -143,7 +147,11 @@
 		clock-gate;
 		fifo-depth = <0x40>;
 		card-detect-delay = <200>;
+#ifdef CONFIG_NOBLEDEV
+		qos_int_level = <400000>;
+#else
 		qos_int_level = <468000>;
+#endif
 		bypass-for-allpass;
 		fix-fmp-size-mismatch;
 		not-allow-single-dma;
