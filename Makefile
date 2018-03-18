@@ -388,7 +388,6 @@ KBUILD_CFLAGS := \
 	-Wundef \
 	-Wno-format-security \
 	-Wno-implicit-function-declaration \
-	-Wno-maybe-uninitialized \
 	-Wno-trigraphs
 
 # Flags
