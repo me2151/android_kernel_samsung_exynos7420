@@ -388,6 +388,7 @@ KBUILD_CFLAGS := \
 	-Wundef \
 	-Wno-format-security \
 	-Wno-implicit-function-declaration \
+	-Wno-maybe-uninitialized \
 	-Wno-trigraphs
 
 # Flags
@@ -618,6 +619,20 @@ endif # $(dot-config)
 all: vmlinux
 
 include $(srctree)/arch/$(SRCARCH)/Makefile
+
+KBUILD_CFLAGS	+= $(call cc-option,-fno-delete-null-pointer-checks,)
+KBUILD_CFLAGS	+= $(call cc-option,-fno-PIE)
+KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
+KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,parentheses,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,unused-const-variable,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,stringop-overflow,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,unused-function,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,unused-variable,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,array-bounds,)
+KBUILD_CFLAGS	+= $(call cc-disable-warning,frame-address,)
+KBUILD_CFLAGS   += $(call cc-disable-warning,format-truncation,)
 
 ifdef CONFIG_READABLE_ASM
 # Disable optimizations that make assembler listings hard to read.
